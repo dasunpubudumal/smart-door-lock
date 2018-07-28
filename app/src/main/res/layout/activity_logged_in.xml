@@ -18,20 +18,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteY="3dp">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/txtLoggedIn"
+            <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Logged In Screen"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/txtLoggedIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Logged In Screen"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnAddDoors"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="add"
+                    android:text="Add Doors" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </TableLayout>
+
     </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

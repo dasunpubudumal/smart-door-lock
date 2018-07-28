@@ -6,7 +6,7 @@ import com.crystall.smartlockprototype.services.firebase.FirebaseCallback;
 import com.crystall.smartlockprototype.beans.firebase.User;
 import com.google.firebase.database.DatabaseReference;
 
-public interface IAuthenticationUtililty {
+public interface IAuthenticationService {
 
     /**
      * Initializes the db.

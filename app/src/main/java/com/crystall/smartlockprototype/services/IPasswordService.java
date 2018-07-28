@@ -1,6 +1,6 @@
 package com.crystall.smartlockprototype.services;
 
-public interface IPasswordUtility {
+public interface IPasswordService {
 
     /**
      * Hash the password

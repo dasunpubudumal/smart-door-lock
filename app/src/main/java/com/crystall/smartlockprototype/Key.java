@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.crystall.smartlockprototype.services.firebase.AuthenticationUtility;
+import com.crystall.smartlockprototype.services.firebase.AuthenticationService;
 
 public class Key extends AppCompatActivity {
 
@@ -17,7 +17,7 @@ public class Key extends AppCompatActivity {
     private EditText password;
     private Button submit;
     private boolean accept  = false;
-    private AuthenticationUtility authenticationUtility;
+    private AuthenticationService authenticationService;
 
     /**
      *
@@ -40,7 +40,7 @@ public class Key extends AppCompatActivity {
         });
 
         try {
-            authenticationUtility = new AuthenticationUtility();
+            authenticationService = new AuthenticationService();
         } catch (Exception e) {
             System.out.println("EXCEPTION OCCURRED!");
         }
@@ -55,7 +55,7 @@ public class Key extends AppCompatActivity {
     public void password_submit(View v){
         try {
             if(password.length() > 0 && username.length() > 0) {
-                authenticationUtility.login(username.getText().toString(),
+                authenticationService.login(username.getText().toString(),
                         getApplicationContext(),
                         password.getText().toString()
                 );

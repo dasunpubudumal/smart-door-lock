@@ -1,10 +1,10 @@
 package com.crystall.smartlockprototype.services.firebase;
 
-import com.crystall.smartlockprototype.services.IPasswordUtility;
+import com.crystall.smartlockprototype.services.IPasswordService;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-public class PasswordUtility implements IPasswordUtility {
+public class PasswordService implements IPasswordService {
 
     /**
      * Hashes the password

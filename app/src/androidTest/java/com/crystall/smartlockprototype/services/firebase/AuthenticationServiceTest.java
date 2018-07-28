@@ -10,13 +10,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class AuthenticationUtilityTest {
+public class AuthenticationServiceTest {
 
-    private final AuthenticationUtility authenticationUtility = new AuthenticationUtility();
+    private final AuthenticationService authenticationService = new AuthenticationService();
 
     @Test
     public void testInitialize() {
-        assertThat(authenticationUtility.initialize(), is(FirebaseDatabase
+        assertThat(authenticationService.initialize(), is(FirebaseDatabase
                 .getInstance(Config.FIREBASE_URL)
                 .getReference()));
     }

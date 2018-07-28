@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoggedInActivity"></activity>
+        <activity android:name=".LoggedInActivity" />
+        <activity android:name=".DoorsActivity"></activity>
     </application>
 
 </manifest>

@@ -7,7 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.crystall.smartlockprototype.LoggedInActivity;
-import com.crystall.smartlockprototype.services.IAuthenticationUtililty;
+import com.crystall.smartlockprototype.services.IAuthenticationService;
 import com.crystall.smartlockprototype.beans.firebase.User;
 import com.crystall.smartlockprototype.config.Config;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,12 +19,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class AuthenticationUtility implements IAuthenticationUtililty {
+public class AuthenticationService implements IAuthenticationService {
 
-    private final PasswordUtility passwordUtility = new PasswordUtility();
+    private final PasswordService passwordService = new PasswordService();
     private DatabaseReference databaseReference;
 
-    public AuthenticationUtility() {
+    public AuthenticationService() {
         initialize();
     }
 
@@ -87,7 +87,7 @@ public class AuthenticationUtility implements IAuthenticationUtililty {
     @Override
     public int write(User user) {
         int result = 0;
-        user.setPassword(passwordUtility.hash(user.getPassword())); // Hash the password and store
+        user.setPassword(passwordService.hash(user.getPassword())); // Hash the password and store
         Task<Void> users = getDatabaseReference().child("users").child(user.getUsername())
                 .setValue(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -178,7 +178,7 @@ public class AuthenticationUtility implements IAuthenticationUtililty {
 //        TODO: NodeMCU should be sent the signal here inside if(result[0]) block.
         final boolean[] result = new boolean[1];
         read(name, (user) -> {
-            result[0] = passwordUtility.dehashAndCheck(password, user.getPassword());
+            result[0] = passwordService.dehashAndCheck(password, user.getPassword());
             if (result[0]) {
                 Intent[] i = {new Intent(context, LoggedInActivity.class)};
                 i[0].setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
