@@ -1,4 +1,4 @@
-package com.crystall.smartlockprototype.authutil.firebase;
+package com.crystall.smartlockprototype.services.firebase;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.crystall.smartlockprototype.LoggedInActivity;
-import com.crystall.smartlockprototype.authutil.IAuthenticationUtililty;
+import com.crystall.smartlockprototype.services.IAuthenticationUtililty;
 import com.crystall.smartlockprototype.beans.firebase.User;
 import com.crystall.smartlockprototype.config.Config;
 import com.google.android.gms.tasks.OnFailureListener;

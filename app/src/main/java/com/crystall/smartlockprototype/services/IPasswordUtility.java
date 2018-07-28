@@ -1,4 +1,4 @@
-package com.crystall.smartlockprototype.authutil;
+package com.crystall.smartlockprototype.services;
 
 public interface IPasswordUtility {
 

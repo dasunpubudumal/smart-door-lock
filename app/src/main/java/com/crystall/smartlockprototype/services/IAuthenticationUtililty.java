@@ -1,8 +1,8 @@
-package com.crystall.smartlockprototype.authutil;
+package com.crystall.smartlockprototype.services;
 
 import android.content.Context;
 
-import com.crystall.smartlockprototype.authutil.firebase.FirebaseCallback;
+import com.crystall.smartlockprototype.services.firebase.FirebaseCallback;
 import com.crystall.smartlockprototype.beans.firebase.User;
 import com.google.firebase.database.DatabaseReference;
 

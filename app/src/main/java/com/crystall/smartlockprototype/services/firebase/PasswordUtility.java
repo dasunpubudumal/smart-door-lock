@@ -1,6 +1,6 @@
-package com.crystall.smartlockprototype.authutil.firebase;
+package com.crystall.smartlockprototype.services.firebase;
 
-import com.crystall.smartlockprototype.authutil.IPasswordUtility;
+import com.crystall.smartlockprototype.services.IPasswordUtility;
 
 import org.mindrot.jbcrypt.BCrypt;
 

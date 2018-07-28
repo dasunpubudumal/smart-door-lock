@@ -1,4 +1,4 @@
-package com.crystall.smartlockprototype.authutil.firebase;
+package com.crystall.smartlockprototype.services.firebase;
 
 import com.crystall.smartlockprototype.beans.firebase.User;
 

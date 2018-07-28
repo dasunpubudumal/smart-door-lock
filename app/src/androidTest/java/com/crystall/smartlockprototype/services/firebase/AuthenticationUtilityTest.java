@@ -1,12 +1,9 @@
-package com.crystall.smartlockprototype.authutil.firebase;
+package com.crystall.smartlockprototype.services.firebase;
 
-import com.crystall.smartlockprototype.beans.firebase.User;
 import com.crystall.smartlockprototype.config.Config;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.junit.Test;
-
-import java.sql.Timestamp;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
