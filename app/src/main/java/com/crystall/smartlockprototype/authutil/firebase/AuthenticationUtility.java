@@ -52,14 +52,13 @@ public class AuthenticationUtility implements IAuthenticationUtililty {
 
     /**
      * Read from the database.
-     * USing a callback for async datastream.
+     * Using a callback for async datastream.
      *
      * @param username
      * @return User
      */
     @Override
     public void read(String username, final FirebaseCallback callback) {
-
         getDatabaseReference().child("users").child(username)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -80,38 +79,30 @@ public class AuthenticationUtility implements IAuthenticationUtililty {
     }
 
     /**
-     * Writes to the database.
+     * Writes a user to the database.
      *
      * @param user
      * @return 0 -> failure 1 -> success.
      */
     @Override
     public int write(User user) {
-
         int result = 0;
-
-        // Hash the password and store
-        user.setPassword(passwordUtility.hash(user.getPassword()));
-
+        user.setPassword(passwordUtility.hash(user.getPassword())); // Hash the password and store
         Task<Void> users = getDatabaseReference().child("users").child(user.getUsername())
                 .setValue(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.i("SUCCESS", "Successful Data Write");
+                        Log.i("SUCCESS",
+                                "Successful Data Write");
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.e("FAILURE", "Failure Data Write");
                     }
                 });
-
-        if (users.isSuccessful()) {
-            result = 1;
-        }
-
+        if (users.isSuccessful()) { result = 1; }
         return result;
     }
 
@@ -123,6 +114,26 @@ public class AuthenticationUtility implements IAuthenticationUtililty {
      */
     @Override
     public int update(User user) {
+        Task<Void> users = getDatabaseReference().child("users").child(user.getUsername())
+                .setValue(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.i("SUCCESS",
+                                "Successful Data Update");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i("FAILURE",
+                                "Failed Data Update");
+                    }
+                });
+
+        if (users.isSuccessful()) {
+            return 1;
+        }
         return 0;
     }
 
@@ -134,11 +145,29 @@ public class AuthenticationUtility implements IAuthenticationUtililty {
      */
     @Override
     public int delete(String name) {
+        Task<Void> task = getDatabaseReference().child("users").child(name).removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.i("SUCCESS",
+                                "Successful Data Removal");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i("FAILURE",
+                                "Failed Data Removal");
+                    }
+                });
+        if (task.isSuccessful()) {
+            return 1;
+        }
         return 0;
     }
 
     /**
-     * TODO: NodeMCU should be sent the signal here inside if(result[0]) block.
+     * Login Functionality
      *
      * @param name
      * @param context
@@ -146,6 +175,7 @@ public class AuthenticationUtility implements IAuthenticationUtililty {
      */
     @Override
     public void login(final String name, final Context context, final String password) {
+//        TODO: NodeMCU should be sent the signal here inside if(result[0]) block.
         final boolean[] result = new boolean[1];
         read(name, (user) -> {
             result[0] = passwordUtility.dehashAndCheck(password, user.getPassword());

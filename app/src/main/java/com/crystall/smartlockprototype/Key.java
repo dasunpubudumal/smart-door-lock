@@ -56,8 +56,6 @@ public class Key extends AppCompatActivity {
         } catch (Exception e) {
             System.out.println("EXCEPTION OCCURRED!");
         }
-
-//        authenticationUtility.write(new User("dasun", "dasun", "2018-08-08 10:10:10", "2018-08-09 10:10:11"));
     }
 
     /**
