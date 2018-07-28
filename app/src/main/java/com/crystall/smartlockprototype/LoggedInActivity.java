@@ -36,16 +36,12 @@ public class LoggedInActivity extends AppCompatActivity {
 
         addDoors.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                add(v);
-            }
+            public void onClick(View v) { add(v); }
         });
     }
 
     public void add(View v) {
-        Intent[] i = {new Intent(getApplicationContext(), DoorsActivity.class)};
-        i[0].setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        getApplicationContext().startActivities(i);
+        getApplicationContext().startActivity(new Intent(getApplicationContext(), DoorsActivity.class));
     }
 
     private User getCurrentUser() {

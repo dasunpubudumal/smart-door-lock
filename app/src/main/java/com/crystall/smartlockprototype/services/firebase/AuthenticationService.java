@@ -180,10 +180,10 @@ public class AuthenticationService implements IAuthenticationService {
         read(name, (user) -> {
             result[0] = passwordService.dehashAndCheck(password, user.getPassword());
             if (result[0]) {
-                Intent[] i = {new Intent(context, LoggedInActivity.class)};
-                i[0].setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                i[0].putExtra("USER", user);  // Send the user to the next intent.
-                context.startActivities(i);
+                Intent intent = new Intent(context, LoggedInActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("USER", user);  // Send the user to the next intent.
+                context.startActivity(intent);
             } else {
                 Toast.makeText(context, "Please enter proper credentials!",
                         Toast.LENGTH_SHORT).show();
