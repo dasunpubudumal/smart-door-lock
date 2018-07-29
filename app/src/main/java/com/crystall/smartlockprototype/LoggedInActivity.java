@@ -41,7 +41,7 @@ public class LoggedInActivity extends AppCompatActivity {
     }
 
     public void add(View v) {
-        getApplicationContext().startActivity(new Intent(getApplicationContext(), DoorsActivity.class));
+        // TODO: IMPLEMENT THE NODEMCU LOGIC HERE.
     }
 
     private User getCurrentUser() {

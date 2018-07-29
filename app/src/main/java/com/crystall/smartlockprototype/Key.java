@@ -9,7 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.crystall.smartlockprototype.beans.firebase.User;
 import com.crystall.smartlockprototype.services.firebase.AuthenticationService;
+
+import java.util.HashMap;
 
 public class Key extends AppCompatActivity {
 
@@ -41,6 +44,7 @@ public class Key extends AppCompatActivity {
 
         try {
             authenticationService = new AuthenticationService();
+//            authenticationService.write(new User("dasunp", "dasun", "2018-08-08 10:10:10", "2018-08-08 10:10:10", new HashMap<>().ad))
         } catch (Exception e) {
             System.out.println("EXCEPTION OCCURRED!");
         }

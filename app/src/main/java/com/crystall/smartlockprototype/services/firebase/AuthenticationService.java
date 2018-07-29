@@ -175,7 +175,6 @@ public class AuthenticationService implements IAuthenticationService {
      */
     @Override
     public void login(final String name, final Context context, final String password) {
-//        TODO: NodeMCU should be sent the signal here inside if(result[0]) block.
         final boolean[] result = new boolean[1];
         read(name, (user) -> {
             result[0] = passwordService.dehashAndCheck(password, user.getPassword());
