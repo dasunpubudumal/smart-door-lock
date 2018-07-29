@@ -13,6 +13,9 @@ public interface IDoorService {
 
     int unlock(String doorId, String password, User user);
 
+    // For the prototype
+    int unlock();
+
     int add(Door door, User user, Context context);
 
     Door getDoor(String doorId, User user, FirebaseDoorCallback firebaseDoorCallback);

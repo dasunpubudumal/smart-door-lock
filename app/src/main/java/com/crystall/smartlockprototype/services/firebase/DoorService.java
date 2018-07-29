@@ -38,6 +38,16 @@ public class DoorService implements IDoorService{
     }
 
     /**
+     * For the Prototype
+     * @return
+     */
+    @Override
+    public int unlock() {
+//        TODO: IMPLEMENT THE NODEMCU LOGIC HERE.
+        return 0;
+    }
+
+    /**
      *
      * @param door
      * @return

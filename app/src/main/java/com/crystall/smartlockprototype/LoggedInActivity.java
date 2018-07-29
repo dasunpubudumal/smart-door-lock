@@ -9,12 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.crystall.smartlockprototype.beans.firebase.User;
+import com.crystall.smartlockprototype.services.firebase.DoorService;
 
 public class LoggedInActivity extends AppCompatActivity {
 
     private TextView label;
     private User currentUser;
     private Button addDoors;
+    private DoorService doorService;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -38,10 +40,13 @@ public class LoggedInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) { add(v); }
         });
+
+        doorService = new DoorService();
     }
 
     public void add(View v) {
-        // TODO: IMPLEMENT THE NODEMCU LOGIC HERE.
+        doorService.unlock();
+
     }
 
     private User getCurrentUser() {
