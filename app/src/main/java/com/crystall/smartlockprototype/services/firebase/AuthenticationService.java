@@ -13,11 +13,13 @@ import com.crystall.smartlockprototype.config.Config;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.internal.api.FirebaseNoSignedInUserException;
 
 public class AuthenticationService implements IAuthenticationService {
 
@@ -90,18 +92,9 @@ public class AuthenticationService implements IAuthenticationService {
         user.setPassword(passwordService.hash(user.getPassword())); // Hash the password and store
         Task<Void> users = getDatabaseReference().child("users").child(user.getUsername())
                 .setValue(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.i("SUCCESS",
-                                "Successful Data Write");
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("FAILURE", "Failure Data Write");
-                    }
-                });
+                .addOnSuccessListener(aVoid -> Log.i("SUCCESS",
+                        "Successful Data Write"))
+                .addOnFailureListener(e -> Log.e("FAILURE", "Failure Data Write"));
         if (users.isSuccessful()) { result = 1; }
         return result;
     }
@@ -116,20 +109,10 @@ public class AuthenticationService implements IAuthenticationService {
     public int update(User user) {
         Task<Void> users = getDatabaseReference().child("users").child(user.getUsername())
                 .setValue(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.i("SUCCESS",
-                                "Successful Data Update");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.i("FAILURE",
-                                "Failed Data Update");
-                    }
-                });
+                .addOnSuccessListener(aVoid -> Log.i("SUCCESS",
+                        "Successful Data Update"))
+                .addOnFailureListener(e -> Log.i("FAILURE",
+                        "Failed Data Update"));
 
         if (users.isSuccessful()) {
             return 1;
@@ -146,20 +129,10 @@ public class AuthenticationService implements IAuthenticationService {
     @Override
     public int delete(String name) {
         Task<Void> task = getDatabaseReference().child("users").child(name).removeValue()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.i("SUCCESS",
-                                "Successful Data Removal");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.i("FAILURE",
-                                "Failed Data Removal");
-                    }
-                });
+                .addOnSuccessListener(aVoid -> Log.i("SUCCESS",
+                        "Successful Data Removal"))
+                .addOnFailureListener(e -> Log.i("FAILURE",
+                        "Failed Data Removal"));
         if (task.isSuccessful()) {
             return 1;
         }

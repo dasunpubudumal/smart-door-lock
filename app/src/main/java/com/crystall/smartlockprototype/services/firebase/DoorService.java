@@ -23,7 +23,7 @@ public class DoorService implements IDoorService{
     public DoorService(){initialize();}
 
     /**
-     *
+     * This is for the original product - still not implemented.
      * @param doorId
      * @return
      */
@@ -38,7 +38,7 @@ public class DoorService implements IDoorService{
     }
 
     /**
-     * For the Prototype
+     * This is for the Prototype - have to implement
      * @return
      */
     @Override
@@ -48,7 +48,7 @@ public class DoorService implements IDoorService{
     }
 
     /**
-     *
+     * Add doors to the database
      * @param door
      * @return
      */
@@ -58,7 +58,7 @@ public class DoorService implements IDoorService{
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "Please enter proper credentials!",
+                        Toast.makeText(context, "Door Successfully added!",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -67,6 +67,13 @@ public class DoorService implements IDoorService{
         return 0;
     }
 
+    /**
+     * Get a door from the database
+     * @param doorId
+     * @param user
+     * @param callback
+     * @return
+     */
     @Override
     public Door getDoor(String doorId, User user, FirebaseDoorCallback callback) {
         getDatabaseReference().child("users").child(user.getUsername()).child("doors")
@@ -87,7 +94,7 @@ public class DoorService implements IDoorService{
     }
 
     /**
-     *
+     * Initialize the firebase connection
      * @return
      */
     public DatabaseReference initialize() {

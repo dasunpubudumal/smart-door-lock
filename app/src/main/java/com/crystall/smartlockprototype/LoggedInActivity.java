@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crystall.smartlockprototype.beans.firebase.User;
 import com.crystall.smartlockprototype.services.firebase.DoorService;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoggedInActivity extends AppCompatActivity {
 
@@ -17,6 +19,7 @@ public class LoggedInActivity extends AppCompatActivity {
     private User currentUser;
     private Button addDoors;
     private DoorService doorService;
+    private FirebaseUser firebaseUser;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -30,7 +33,16 @@ public class LoggedInActivity extends AppCompatActivity {
 
         // Set up the global user.
         Intent i = getIntent();
-        setCurrentUser((User) i.getSerializableExtra("USER"));
+
+        // TODO: Two classes of users. Have to use if conditions for everyting regarding to the two classes of users.
+        if(i.getSerializableExtra("USER") instanceof User) {
+            setCurrentUser((User) i.getSerializableExtra("USER"));
+        } else if (i.getSerializableExtra("USER") instanceof FirebaseUser) {
+            setCurrentUser((FirebaseUser) i.getSerializableExtra("USER"));
+        } else {
+            Toast.makeText(getApplicationContext(), "Invalid Serialization",
+                    Toast.LENGTH_SHORT).show();
+        }
 
         // Display the Headline.
         label.setText("Welcome, " + getCurrentUser().getUsername().substring(0,1).toUpperCase()
@@ -56,4 +68,6 @@ public class LoggedInActivity extends AppCompatActivity {
     private void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
+
+    private void setCurrentUser(FirebaseUser user) {this.firebaseUser = user;}
 }
