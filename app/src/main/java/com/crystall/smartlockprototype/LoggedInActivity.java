@@ -45,13 +45,9 @@ public class LoggedInActivity extends AppCompatActivity {
         }
 
         // Display the Headline.
-        label.setText("Welcome, " + getCurrentUser().getUsername().substring(0,1).toUpperCase()
-        + getCurrentUser().getUsername().substring(1));
+        label.setText("Welcome, " + firstLetterUppercase(getCurrentUser().getUsername()));
 
-        addDoors.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { add(v); }
-        });
+        addDoors.setOnClickListener(this::add);
 
         doorService = new DoorService();
     }
@@ -70,4 +66,8 @@ public class LoggedInActivity extends AppCompatActivity {
     }
 
     private void setCurrentUser(FirebaseUser user) {this.firebaseUser = user;}
+
+    private String firstLetterUppercase(String s) {
+        return s.substring(0,1).toUpperCase() + s.substring(1);
+    }
 }

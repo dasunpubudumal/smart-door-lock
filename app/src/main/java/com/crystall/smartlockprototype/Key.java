@@ -35,16 +35,10 @@ public class Key extends AppCompatActivity {
         username = findViewById(R.id.txtUsername);
         password = findViewById(R.id.txtPassword);
         submit = findViewById(R.id.btnLogIn);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                password_submit(v);
-            }
-        });
+        submit.setOnClickListener(this::password_submit);
 
         try {
             authenticationService = new AuthenticationService();
-//            authenticationService.write(new User("dasunp", "dasun", "2018-08-08 10:10:10", "2018-08-08 10:10:10", new HashMap<>().ad))
         } catch (Exception e) {
             System.out.println("EXCEPTION OCCURRED!");
         }
