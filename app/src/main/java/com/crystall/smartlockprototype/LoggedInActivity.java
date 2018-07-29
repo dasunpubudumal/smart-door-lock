@@ -54,7 +54,6 @@ public class LoggedInActivity extends AppCompatActivity {
 
     public void add(View v) {
         doorService.unlock();
-
     }
 
     private User getCurrentUser() {
