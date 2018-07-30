@@ -66,6 +66,10 @@ public class LoggedInActivity extends AppCompatActivity {
 
     private void setCurrentUser(FirebaseUser user) {this.firebaseUser = user;}
 
+    private FirebaseUser getFirebaseUser() {
+        return firebaseUser;
+    }
+
     private String firstLetterUppercase(String s) {
         return s.substring(0,1).toUpperCase() + s.substring(1);
     }

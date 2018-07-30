@@ -2,6 +2,7 @@ package com.crystall.smartlockprototype.services.firebase;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
