@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.crystall.smartlockprototype.Key;
 import com.crystall.smartlockprototype.LoggedInActivity;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -34,8 +35,10 @@ public class FirebaseAuthService implements IFirebaseAuthService{
     @Override
     public int signUp(String email, String password, final Context context) {
         Task<AuthResult> authResultTask = getmAuth().createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener(authResult -> Toast.makeText(context,
-                        "Successfull firebase auth user added", Toast.LENGTH_SHORT).show())
+                .addOnSuccessListener(authResult -> {
+                    Intent intent = new Intent(context, Key.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                })
                 .addOnFailureListener(e -> Toast.makeText(context,
                         "Successfull firebase auth user added", Toast.LENGTH_SHORT).show());
         if (authResultTask.isSuccessful()) return 1;
