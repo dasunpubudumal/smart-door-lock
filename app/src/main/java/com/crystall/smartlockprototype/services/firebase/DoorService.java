@@ -1,6 +1,10 @@
 package com.crystall.smartlockprototype.services.firebase;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,11 +20,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
 public class DoorService implements IDoorService{
 
     private DatabaseReference databaseReference;
+    private WifiManager mainWifi;
+    private Context mContext;
 
-    public DoorService(){initialize();}
+    public DoorService(Context mContext){
+        initialize();
+        this.mContext = mContext;
+        mainWifi = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
+        connectToNetwork();
+    }
 
     /**
      * This is for the original product - still not implemented.
@@ -37,6 +50,46 @@ public class DoorService implements IDoorService{
         return 0;
     }
 
+    private boolean connectToNetwork() {
+        if (!isMobileConnected()) {
+            if (!mainWifi.isWifiEnabled()) {
+                mainWifi.setWifiEnabled(true);
+                System.out.println("WiFi enabled");
+            }
+            String networkSSID = "WiFi_Amila";
+            String networkPass = "Oshada@2014";
+            boolean returnVal = false;
+            WifiConfiguration conf = new WifiConfiguration();
+            conf.SSID = "\"" + networkSSID + "\"";
+            conf.preSharedKey = "\"" + networkPass + "\"";
+            mainWifi.addNetwork(conf);
+            List<WifiConfiguration> list = mainWifi.getConfiguredNetworks();
+            for (WifiConfiguration i : list) {
+                if (i.SSID != null && i.SSID.equals("\"" + networkSSID + "\"")) {
+                    mainWifi.disconnect();
+                    mainWifi.enableNetwork(i.networkId, true);
+                    mainWifi.reconnect();
+                    returnVal = true;
+                    break;
+                }
+            }
+            return returnVal;
+
+        }else{
+            Toast.makeText(mContext,"Please Turn Off Mobile Network to Proceed",Toast.LENGTH_LONG).show();
+            return false;
+        }
+    }
+
+    private boolean isMobileConnected(){
+        ConnectivityManager connMgr = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo networkInfo = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        boolean isMobileConn = networkInfo.isConnected();
+        return isMobileConn;
+    }
+
+
     /**
      * This is for the Prototype - have to implement
      * @return
@@ -44,6 +97,14 @@ public class DoorService implements IDoorService{
     @Override
     public int unlock() {
 //        TODO: IMPLEMENT THE NODEMCU LOGIC HERE.
+        if(true){
+            System.out.println("Connected");
+            HTTPRequestService service = new HTTPRequestService(mContext);
+            service.lockRequest();
+        }else{
+            Toast.makeText(mContext,"Error when connecting to the Lock",Toast.LENGTH_LONG).show();
+        }
+
         return 0;
     }
 

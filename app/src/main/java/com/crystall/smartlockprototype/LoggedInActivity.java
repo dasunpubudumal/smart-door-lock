@@ -12,13 +12,14 @@ import android.widget.Toast;
 
 import com.crystall.smartlockprototype.beans.firebase.User;
 import com.crystall.smartlockprototype.services.firebase.DoorService;
+import com.crystall.smartlockprototype.services.firebase.HTTPRequestService;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoggedInActivity extends AppCompatActivity {
 
     private TextView label;
     private User currentUser;
-    private Button addDoors;
+    private Button addDoors,closeDoor;
     private DoorService doorService;
     private FirebaseUser firebaseUser;
     private Button signUp;
@@ -33,8 +34,16 @@ public class LoggedInActivity extends AppCompatActivity {
         label = findViewById(R.id.txtLoggedIn);
         addDoors = findViewById(R.id.btnAddDoors);
         signUp = findViewById(R.id.btnSignUp);
+        closeDoor = findViewById(R.id.btnCloseDoor);
         addDoors.setOnClickListener(this::add);
         signUp.setOnClickListener(this::startUserSignUpActivity);
+        closeDoor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HTTPRequestService service = new HTTPRequestService(getApplicationContext());
+                service.lockRequest();
+            }
+        });
 
         // Set up the global user.
         Intent i = getIntent();
@@ -52,7 +61,7 @@ public class LoggedInActivity extends AppCompatActivity {
         // Display the Headline.
         label.setText("Welcome, " + firstLetterUppercase(getCurrentUser().getUsername()));
 
-        doorService = new DoorService();
+        doorService = new DoorService(getApplicationContext());
     }
 
     public void add(View v) {
