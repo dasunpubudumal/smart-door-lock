@@ -49,6 +49,13 @@
                     android:onClick="add"
                     android:text="Open the Door" />
 
+                <Button
+                    android:id="@+id/btnSignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign Up" />
+
+
             </TableRow>
 
             <TableRow

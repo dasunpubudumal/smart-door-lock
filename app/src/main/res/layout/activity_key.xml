@@ -55,15 +55,15 @@
                 android:text="Log In"
                 tools:layout_editor_absoluteX="148dp"
                 tools:layout_editor_absoluteY="247dp" />
+
+            <Button
+                android:id="@+id/btnFirebaseConnect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Log In With Firebase"
+                tools:layout_editor_absoluteX="106dp"
+                tools:layout_editor_absoluteY="279dp" />
         </LinearLayout>
     </FrameLayout>
-
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Connect"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="272dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.crystall.smartlockprototype;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ public class LoggedInActivity extends AppCompatActivity {
     private Button addDoors;
     private DoorService doorService;
     private FirebaseUser firebaseUser;
+    private Button signUp;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -30,6 +32,9 @@ public class LoggedInActivity extends AppCompatActivity {
         // Set up the component IDs.
         label = findViewById(R.id.txtLoggedIn);
         addDoors = findViewById(R.id.btnAddDoors);
+        signUp = findViewById(R.id.btnSignUp);
+        addDoors.setOnClickListener(this::add);
+        signUp.setOnClickListener(this::startUserSignUpActivity);
 
         // Set up the global user.
         Intent i = getIntent();
@@ -46,8 +51,6 @@ public class LoggedInActivity extends AppCompatActivity {
 
         // Display the Headline.
         label.setText("Welcome, " + firstLetterUppercase(getCurrentUser().getUsername()));
-
-        addDoors.setOnClickListener(this::add);
 
         doorService = new DoorService();
     }
@@ -72,5 +75,10 @@ public class LoggedInActivity extends AppCompatActivity {
 
     private String firstLetterUppercase(String s) {
         return s.substring(0,1).toUpperCase() + s.substring(1);
+    }
+
+
+    private void startUserSignUpActivity(View v){
+        getApplicationContext().startActivity(new Intent(getApplicationContext(), UserSignUpActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 }

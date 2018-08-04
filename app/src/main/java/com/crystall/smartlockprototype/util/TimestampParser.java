@@ -29,7 +29,7 @@ public class TimestampParser implements ITimestampParser{
      */
     @SuppressLint("SimpleDateFormat")
     @Override
-    public String storeTimeStamp() {
+    public  String storeTimeStamp() {
         return (new SimpleDateFormat("dd-M-yyyy hh:mm:ss").format(new Date()));
     }
 

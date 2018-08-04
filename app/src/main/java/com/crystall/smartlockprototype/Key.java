@@ -32,6 +32,7 @@ import com.android.volley.toolbox.Volley;
 import com.crystall.smartlockprototype.beans.firebase.User;
 import com.crystall.smartlockprototype.services.WiFiConnectivityService;
 import com.crystall.smartlockprototype.services.firebase.AuthenticationService;
+import com.crystall.smartlockprototype.services.firebase.FirebaseAuthService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,9 +44,8 @@ public class Key extends AppCompatActivity {
     private EditText password;
     private Button submit;
     private Button btn;
-    private boolean accept = false;
     private AuthenticationService authenticationService;
-    private WiFiConnectivityService connectivityService;
+    private FirebaseAuthService firebaseAuthService;
     private WifiManager wifiManager;
 
     /**
@@ -62,13 +62,11 @@ public class Key extends AppCompatActivity {
         username = findViewById(R.id.txtUsername);
         password = findViewById(R.id.txtPassword);
         submit = findViewById(R.id.btnLogIn);
-        btn = findViewById(R.id.btn);
+        btn = findViewById(R.id.btnFirebaseConnect);
         submit.setOnClickListener(this::password_submit);
         wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-
-        btn.setOnClickListener(v -> {
-            wifiManager.setWifiEnabled(true);
-        });
+        firebaseAuthService = new FirebaseAuthService();
+        btn.setOnClickListener(this::firebase_submit);
 
 
         try {
@@ -115,10 +113,6 @@ public class Key extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             StringBuffer stringBuffer = new StringBuffer();
-//            List<ScanResult> scanResults = wifiManager.getScanResults();
-//            for (ScanResult scanResult:scanResults) {
-//                stringBuffer.append(scanResult);
-//            }
             conf.SSID =  "\"\"" + ssid +  "\"\"";
             conf.preSharedKey =  "\"\""+ pass + "\"\"";
             conf.status = WifiConfiguration.Status.ENABLED;
@@ -159,6 +153,23 @@ public class Key extends AppCompatActivity {
         conf.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
         conf.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
         return conf;
+    }
+
+    private int firebaseAuth(String email, String password) {
+        return firebaseAuthService.signIn(email, password, getApplicationContext());
+    }
+
+    private void firebase_submit(View v) {
+        btn.setOnClickListener(k -> {
+            if (username.length() > 0 && password.length() > 0) {
+                firebaseAuth(username.toString(), password.toString());
+            } else {
+                Toast.makeText(getApplicationContext(), "Please enter proper credentials!",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
     }
 
 }
