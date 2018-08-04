@@ -30,6 +30,8 @@ public class UserSignUpActivity extends AppCompatActivity {
 
         username = findViewById(R.id.txtSignUpUsername);
         password = findViewById(R.id.txtDoorPassword);
+        signUp = findViewById(R.id.btnSignUp);
+        firebaseSignUp = findViewById(R.id.btnSignUpFirebase);
         firebaseSignUp.setOnClickListener(this::setFirebaseSignUp);
         signUp.setOnClickListener(this::setSignUp);
 
