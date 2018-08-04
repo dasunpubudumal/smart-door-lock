@@ -78,7 +78,7 @@ public class LoggedInActivity extends AppCompatActivity {
     }
 
 
-    public void startUserSignUpActivity(View v){
+    private void startUserSignUpActivity(View v){
         getApplicationContext().startActivity(new Intent(getApplicationContext(), UserSignUpActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 }

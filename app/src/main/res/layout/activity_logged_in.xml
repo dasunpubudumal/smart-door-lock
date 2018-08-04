@@ -42,6 +42,20 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
 
+
+                <Button
+                    android:id="@+id/btnConnectDoor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Connect Door" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
                 <Button
                     android:id="@+id/btnAddDoors"
                     android:layout_width="match_parent"
@@ -50,18 +64,29 @@
                     android:text="Open the Door" />
 
                 <Button
-                    android:id="@+id/btnSignUp"
+                    android:id="@+id/btnCloseDoor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="startUserSignUpActivity"
-                    android:text="Sign Up" />
+                    android:text="Close the door" />
 
 
             </TableRow>
 
+
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="add"
+                    android:text="Add Users" />
+
+            </TableRow>
 
         </TableLayout>
 
