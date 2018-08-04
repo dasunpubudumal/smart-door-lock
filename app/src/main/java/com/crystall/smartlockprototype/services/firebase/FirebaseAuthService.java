@@ -40,7 +40,7 @@ public class FirebaseAuthService implements IFirebaseAuthService{
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 })
                 .addOnFailureListener(e -> Toast.makeText(context,
-                        "Successfull firebase auth user added", Toast.LENGTH_SHORT).show());
+                        "Failed to add Firebase User.", Toast.LENGTH_SHORT).show());
         if (authResultTask.isSuccessful()) return 1;
         return 0;
     }
